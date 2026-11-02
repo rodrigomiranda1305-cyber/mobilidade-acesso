@@ -1,0 +1,43 @@
+:root { --creme: #fbf6f1; --esc: #2f3a46; --lar: #e07a28; --verde: #27ae60; --verde-esc: #1f8a4c; --suave: #6b7480; }
+* { box-sizing: border-box; margin: 0; padding: 0 }
+body { font-family: Karla, sans-serif; background: var(--creme); color: var(--esc); line-height: 1.45; -webkit-font-smoothing: antialiased }
+.topo-ok { background: #e7f6ee; border-bottom: 1px solid #bfe6cf; color: #1f6b43; font-size: 14.5px; text-align: center; padding: 9px 14px }
+.topo-ok b { color: #145233 }
+.pg { max-width: 520px; margin: 0 auto; padding: 14px 16px 40px }
+.aviso { text-align: center; font-weight: 800; letter-spacing: .08em; color: var(--lar); font-size: 13px; margin: 6px 0 4px }
+h1 { font-family: Bitter, serif; font-size: 25px; line-height: 1.18; text-align: center; color: #1c1c1e }
+.sub { text-align: center; color: var(--suave); font-size: 15.5px; margin: 6px 0 12px }
+.vp { position: relative; width: 100%; aspect-ratio: 4 / 5; background: #000 center / cover; border-radius: 14px; overflow: hidden; box-shadow: 0 14px 34px rgba(0,0,0,.2); cursor: pointer; -webkit-tap-highlight-color: transparent }
+.vp video { width: 100%; height: 100%; object-fit: cover; display: block; background: #000 }
+.vp-som, .vp-play, .vp-cont { position: absolute; display: none }
+.vp[data-estado=mudo] .vp-som { display: flex; left: 50%; top: 50%; transform: translate(-50%, -50%); flex-direction: column; align-items: center; gap: 4px; background: rgba(224,122,40,.95); color: #fff; padding: 16px 22px; border-radius: 16px; text-align: center; animation: pulsa 1.6s infinite; width: 72% }
+.vp-som b { font-family: Bitter, serif; font-size: 19px } .vp-som span { font-size: 15px } .vp-ico { font-size: 34px; line-height: 1 }
+@keyframes pulsa { 0%, 100% { transform: translate(-50%, -50%) scale(1) } 50% { transform: translate(-50%, -50%) scale(1.05) } }
+.vp[data-estado=parado] .vp-play { display: flex; inset: 0; align-items: center; justify-content: center; background: rgba(0,0,0,.25) }
+.vp-play span { width: 86px; height: 86px; border-radius: 50%; background: rgba(39,174,96,.95); position: relative; box-shadow: 0 8px 24px rgba(0,0,0,.3) }
+.vp-play span:after { content: ''; position: absolute; left: 34px; top: 25px; border-left: 26px solid #fff; border-top: 18px solid transparent; border-bottom: 18px solid transparent }
+.vp[data-estado=continuar] .vp-cont { display: flex; inset: 0; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: rgba(28,28,30,.82); color: #fff; padding: 20px }
+.vp-cont b { font-family: Bitter, serif; font-size: 19px; margin-bottom: 4px }
+.vp-cont button { width: 82%; border: 0; border-radius: 10px; padding: 13px; font: 700 16px Karla, sans-serif; cursor: pointer; background: var(--verde); color: #fff }
+.vp-cont button + button { background: #fff; color: var(--esc) }
+.vp-barra { position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: rgba(255,255,255,.25) } .vp-barra i { display: block; height: 100%; width: 0; background: var(--lar); transition: width .25s linear }
+.cta-bloco { display: none; margin-top: 16px } .cta-bloco.ver { display: block; animation: surge .5s ease }
+@keyframes surge { from { opacity: 0; transform: translateY(10px) } to { opacity: 1; transform: none } }
+.itens { list-style: none; margin: 4px 0 12px }
+.itens li { position: relative; padding: 7px 0 7px 32px; font-size: 16px; border-bottom: 1px solid #efe6dc }
+.itens li:before { content: '✓'; position: absolute; left: 0; top: 7px; width: 22px; height: 22px; border-radius: 50%; background: var(--verde); color: #fff; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center }
+.preco { text-align: center; margin: 10px 0 0 } .preco b { display: block; font-family: Bitter, serif; font-size: 40px; color: var(--verde-esc); line-height: 1.1 }
+.preco small { color: var(--suave); font-size: 14px }
+.so-pix { display: none } .pix .so-pix { display: inline } .pix .so-cartao { display: none }
+[id^=kiwify-upsell-]:not([id*=trigger]) { margin-top: 6px; text-align: center }
+[id^=kiwify-upsell-trigger-] { display: block; width: 100%; border: 0; border-radius: 10px; padding: 17px 14px; font: 700 19px Karla, sans-serif; cursor: pointer;
+  background: var(--kiwify-upsell-accept-bg, #27ae60); color: #fff; box-shadow: 0 6px 0 #1f9150, 0 12px 24px rgba(39,174,96,.3) }
+[id^=kiwify-upsell-cancel-trigger-] { margin-top: 14px; color: #8a8a8a; font-size: 15px; text-decoration: underline; cursor: pointer }
+.garantia { display: flex; gap: 12px; align-items: center; background: #fff; border-radius: 14px; padding: 12px 14px; margin-top: 16px; box-shadow: 0 6px 20px rgba(0,0,0,.06); font-size: 14.5px }
+.garantia .s { flex: none; width: 58px; height: 58px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ffd86b, #e8a516 70%); display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: Bitter, serif; color: #3a2a05; font-weight: 800 }
+.garantia .s b { font-size: 21px; line-height: 1 } .garantia .s span { font-size: 9px; letter-spacing: 1px }
+.nota { font-size: 12.5px; color: var(--suave); text-align: center; margin-top: 12px }
+.sair { text-align: center; margin-top: 26px; font-size: 13px } .sair a { color: #9aa1a9 }
+.perg { margin-top: 14px } .perg button { display: block; width: 100%; text-align: left; background: #fff; border: 1.5px solid #e6ddd2; border-radius: 12px; padding: 14px 16px; margin: 8px 0; font: 700 17px Karla, sans-serif; color: var(--esc); cursor: pointer }
+.perg button:active, .perg button:hover { border-color: var(--lar); background: #fff7f0 }
+.perg button.pular { background: none; border: 0; text-align: center; font-weight: 400; font-size: 14px; color: #9aa1a9; text-decoration: underline; padding: 8px }
