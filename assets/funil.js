@@ -7,10 +7,12 @@
 (function () {
   var ORDEM = ['u01', 'u02', 'u03', 'u04', 'u05', 'u06', 'u07', 'u08', 'u09', 'u10'];
   var BASE = location.origin + location.pathname.replace(/[^\/]+\/(index\.html)?$/, '');
+  var ATIVOS = window.M8_ATIVOS || null;   // assets/passos.js: etapas que existem (as que faltam são puladas)
+  var ativo = function (p) { return !ATIVOS || ATIVOS.indexOf(p) >= 0; };
   var ls = { get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
   var qs = function (k) { var m = new RegExp('[?&]' + k + '=([^&#]*)').exec(location.search); return m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : null; };
   var ordem = function () { try { var o = JSON.parse(ls.get('m8_ordem') || 'null'); if (o && o.length === ORDEM.length) return o; } catch (e) {} return ORDEM.slice(); };
-  var proximo = function (u) { var o = ordem(), i = o.indexOf(u); return i >= 0 && i + 1 < o.length ? o[i + 1] : null; };
+  var proximo = function (u) { var o = ordem(), i = o.indexOf(u); for (var k = i + 1; i >= 0 && k < o.length; k++) if (ativo(o[k])) return o[k]; return null; };
   var url = function (p) { return p ? BASE + p + '/' : ''; };
   var ev = function (n) { try { window.clarity && window.clarity('event', n); } catch (e) {} };
   window.M8 = { ORDEM: ORDEM, BASE: BASE, qs: qs, ordem: ordem, ls: ls, ev: ev };
@@ -28,7 +30,7 @@
     var up = passo.charAt(0) === 'u', base = up ? passo : 'u' + passo.slice(1);
     var depois = base === 'u01' ? 'pergunta' : proximo(base);
     caixa.setAttribute('data-upsell-url', url(depois));
-    caixa.setAttribute('data-downsell-url', up ? url('d' + passo.slice(1)) : url(depois));
+    caixa.setAttribute('data-downsell-url', up && ativo('d' + passo.slice(1)) ? url('d' + passo.slice(1)) : url(depois));
     document.addEventListener('click', function (e) {
       if (e.target.closest('[id^=kiwify-upsell-trigger-]')) ev(passo + '_aceitou');
       if (e.target.closest('[id^=kiwify-upsell-cancel-trigger-]')) ev(passo + '_recusou');
@@ -43,7 +45,7 @@
         var o = ['u01', u].concat(ORDEM.filter(function (x) { return x !== 'u01' && x !== u; }));
         ls.set('m8_ordem', JSON.stringify(o)); ev('pergunta_' + u);
       } else { ls.set('m8_ordem', JSON.stringify(ORDEM)); ev('pergunta_pulou'); }
-      location.href = url(u === 'pular' ? 'u02' : u) + location.search;
+      location.href = url(u === 'pular' ? proximo('u01') : (ativo(u) ? u : proximo('u01'))) + location.search;
     });
   });
 })();
