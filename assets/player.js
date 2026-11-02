@@ -16,7 +16,7 @@
   if (ls.get('m8cta_' + id)) mostrar('volta');
 
   el.innerHTML = '<video playsinline webkit-playsinline preload="auto" muted autoplay poster="' + el.getAttribute('data-poster') + '" src="' + el.getAttribute('data-src') + '"></video>' +
-    '<div class="vp-som"><span class="vp-ico">🔊</span><b>Seu vídeo já começou</b><span>Toque para ouvir</span></div>' +
+    '<div class="vp-som"><span class="vp-ico">🔊</span><div><b>Seu vídeo já começou</b><span>Toque para ouvir</span></div></div>' +
     '<div class="vp-play"><span></span></div><div class="vp-cont"><b>Você já começou a assistir</b><button data-a="c">Continuar de onde parei</button><button data-a="i">Assistir do início</button></div>' +
     '<div class="vp-barra"><i></i></div>';
   var v = el.querySelector('video'), som = el.querySelector('.vp-som'), play = el.querySelector('.vp-play'), cont = el.querySelector('.vp-cont'), barra = el.querySelector('.vp-barra i');

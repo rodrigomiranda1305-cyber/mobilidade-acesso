@@ -43,3 +43,8 @@ h1 { font-family: Bitter, serif; font-size: 25px; line-height: 1.18; text-align:
 .perg button.pular { background: none; border: 0; text-align: center; font-weight: 400; font-size: 14px; color: #9aa1a9; text-decoration: underline; padding: 8px }
 .pular-of { text-align: center; margin-top: 10px; font-size: 13px } .pular-of a { color: #a3aab2 }
 .cta-bloco.ver ~ .pular-of, body.cta-on .pular-of { display: none }
+
+/* 02/11: o aviso de som fica menor e mais para baixo, sem cobrir o título do vídeo; preço do botão numa linha só */
+.vp[data-estado=mudo] .vp-som { top: 5%; transform: translateX(-50%); width: auto; max-width: 92%; flex-direction: row; gap: 10px; padding: 9px 18px 9px 12px; border-radius: 40px; white-space: nowrap }
+.vp-som div { display: flex; flex-direction: column; text-align: left; line-height: 1.2 }
+.vp-som b { font-size: 16px } .vp-som span { font-size: 13px } .vp-ico { font-size: 22px }
