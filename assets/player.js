@@ -11,7 +11,7 @@
   var ev = function (n) { try { window.clarity && window.clarity('event', id + '_' + n); } catch (e) {} };
   var mostrar = function (origem) {
     if (!bloco || bloco.classList.contains('ver')) return;
-    bloco.classList.add('ver'); ls.set('m8cta_' + id, '1'); ev('botao_' + origem);
+    bloco.classList.add('ver'); document.body.classList.add('cta-on'); ls.set('m8cta_' + id, '1'); ev('botao_' + origem);
   };
   if (ls.get('m8cta_' + id)) mostrar('volta');
 
